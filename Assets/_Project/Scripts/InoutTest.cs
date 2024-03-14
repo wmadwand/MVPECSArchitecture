@@ -11,7 +11,7 @@ public class InoutTest : MonoBehaviour
     private float width;
     private float height;
 
-    private Vector3 pos;
+    public Vector3 pos;
 
     void Awake()
     {
@@ -21,6 +21,7 @@ public class InoutTest : MonoBehaviour
         // Position used for the cube.
         position = new Vector3(0.0f, 0.0f, 0.0f);
 
+        Physics2D.queriesHitTriggers = true;
 
         pos = player.transform.position;
     }
