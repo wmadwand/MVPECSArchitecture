@@ -26,6 +26,7 @@ public class InoutTest : MonoBehaviour
         pos = player.transform.position;
     }
 
+    //TODO: move into FixedUpdate
     private void Update()
     {
         if (Input.GetMouseButtonDown(0))
