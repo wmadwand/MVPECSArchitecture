@@ -5,6 +5,7 @@ using UnityEngine;
 public class InoutTest : MonoBehaviour
 {
     public Player player;
+    public ScorePanel scorePanel;
     public float speed = 10;
 
     private Vector3 position;
@@ -24,20 +25,37 @@ public class InoutTest : MonoBehaviour
         Physics2D.queriesHitTriggers = true;
 
         pos = player.transform.position;
+        originPos = pos;
     }
+
+    Vector3 originPos;
+   //public float TotalDistance { get; private set; }
 
     //TODO: move into FixedUpdate
     private void Update()
     {
+        //TODO: use IPointerClickHandler instead
         if (Input.GetMouseButtonDown(0))
         {
             pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
             pos.z = 0;
+
+            originPos = player.transform.position;
         }
 
         player.transform.position = Vector3.Lerp(player.transform.position, pos, speed * Time.deltaTime);
 
+        var distance = Vector3.Distance(originPos, player.transform.position);
+
+        scorePanel.model.AddDistance(distance);
+
+        //TotalDistance += distance;
+        originPos = player.transform.position;
+
         return;
+
+
+
 
         // Handle screen touches.
         if (Input.touchSupported && Input.touchCount > 0)

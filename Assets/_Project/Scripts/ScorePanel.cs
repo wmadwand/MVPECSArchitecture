@@ -6,8 +6,9 @@ using UnityEngine;
 public class ScorePanel : MonoBehaviour
 {
     public TextMeshProUGUI scoreText;
+    public TextMeshProUGUI distanceText;
 
-    private Model model;
+    public Model model;
 
     private void Awake()
     {
@@ -16,7 +17,11 @@ public class ScorePanel : MonoBehaviour
         //TODO: move to Presenter
         model = new Model();
         UpdateView();
+    }
 
+    private void Update()
+    {
+        UpdateView();
     }
 
     private void Player_OnDestroyEnemy(Enemy enemy)
@@ -28,12 +33,19 @@ public class ScorePanel : MonoBehaviour
 
     private void UpdateView()
     {
-        scoreText.text = model.Score.ToString();
+        //TODO: use StringBuilder
+        scoreText.text = $"Score: {model.Score}";
+        distanceText.text = $"Distance: {model.Distance}";
     }
 
     private void OnDestroy()
     {
         Player.OnDestroyEnemy -= Player_OnDestroyEnemy;
+    }
+
+    private void OnApplicationQuit()
+    {
+        model.Save();
     }
 }
 
@@ -62,7 +74,12 @@ public class Model
         return new UserData(Score, Distance);
     }
 
-    ~Model()
+    public void AddDistance(float value)
+    {
+        Distance += value;
+    }
+
+    public void Save()
     {
         _userDataStorage.Save(GetUserData());
     }
