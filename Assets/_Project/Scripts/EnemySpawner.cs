@@ -17,8 +17,15 @@ public class EnemySpawner : MonoBehaviour
     private void Start()
     {
         cts = new CancellationTokenSource();
+        Player.OnDestroyEnemy += Player_OnDestroyEnemy;
 
         _ = Run(cts.Token);
+    }
+
+    private void Player_OnDestroyEnemy(Enemy obj)
+    {
+        collection.Remove(obj);
+        Destroy(obj.gameObject);
     }
 
     private async UniTask Run(CancellationToken token)
@@ -50,6 +57,7 @@ public class EnemySpawner : MonoBehaviour
     private void Spawn()
     {
         var newEnemy = CreateEnemy();
+        newEnemy.Score = Random.Range(10, 50);
         collection.Add(newEnemy);
     }
 
