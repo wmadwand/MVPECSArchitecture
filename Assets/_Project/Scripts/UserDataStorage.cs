@@ -1,19 +1,4 @@
 using Appsulove.Utils;
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-
-public class UserData
-{
-    public int score;
-    public float distance;
-
-    public UserData(int score, float distance)
-    {
-        this.score = score;
-        this.distance = distance;
-    }
-}
 
 public class UserDataStorage
 {

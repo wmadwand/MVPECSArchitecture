@@ -1,13 +1,18 @@
 ﻿using UnityEngine;
 
-public class Model:IApplicationModel
+public interface IApplicationModel
+{
+
+}
+
+public class ApplicationModel : IApplicationModel
 {
     public int Score { get; private set; }
     public float Distance { get; private set; }
 
     private readonly UserDataStorage _userDataStorage;
 
-    public Model()
+    public ApplicationModel()
     {
         //TODO: inject
         _userDataStorage = new UserDataStorage();
@@ -15,8 +20,8 @@ public class Model:IApplicationModel
 
         if (data != null)
         {
-            Score = data.score;
-            Distance = data.distance;
+            Score = data.Score;
+            Distance = data.Distance;
         }
     }
 
@@ -45,8 +50,4 @@ public class Model:IApplicationModel
         Score -= value;
         Score = Mathf.Clamp(Score, 0, Score);
     }
-}
-
-public interface IApplicationModel
-{
 }

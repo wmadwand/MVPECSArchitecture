@@ -8,14 +8,14 @@ public class ScorePanel : MonoBehaviour
     public TextMeshProUGUI scoreText;
     public TextMeshProUGUI distanceText;
 
-    public Model model;
+    public ApplicationModel model;
 
     private void Awake()
     {
         Player.OnDestroyEnemy += Player_OnDestroyEnemy;
 
         //TODO: move to Presenter
-        model = new Model();
+        model = new ApplicationModel();
         UpdateView();
     }
 

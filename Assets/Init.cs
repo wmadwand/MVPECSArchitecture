@@ -16,9 +16,9 @@ public class Init : MonoBehaviour
     {
         var interfaceView = new UIView();
         var gameplayView = new GameplayView();
-        var model = new Model();
+        var model = new ApplicationModel();
 
-        _presenter = new Presenter(gameplayView, interfaceView, model, Screens, GameSettings);
+        _presenter = new ApplicationPresenter(gameplayView, interfaceView, model, Screens, GameSettings);
     }
 
     private void Update()
@@ -27,33 +27,7 @@ public class Init : MonoBehaviour
     }
 }
 
-public interface IApplicationPresenter
-{
-    void Update();
-}
 
-public class Presenter : IApplicationPresenter
-{
-    private readonly GameplayView _gameplayView;
-    private readonly UIView _UIView;
-    private readonly Model _model;
-    private readonly Screens _screens;
-    private readonly GameSettings _settings;
-
-    public Presenter(GameplayView gameplayView, UIView uIView, Model model, Screens screens, GameSettings settings)
-    {
-        _gameplayView = gameplayView;
-        _UIView = uIView;
-        _model = model;
-        _screens = screens;
-        _settings = settings;
-    }
-
-    void IApplicationPresenter.Update()
-    {
-        throw new System.NotImplementedException();
-    }
-}
 
 public class UIView : IUserInterfaceView
 {
