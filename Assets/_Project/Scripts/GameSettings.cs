@@ -10,5 +10,6 @@ namespace Appsulove.Settings
         public int PlayerPositionOffset = 30;
         public int EnemySpawnRate = 5;
         public int EnemyMaxCount = 15;
-    } 
+        public float PlayerSpeed = 5;
+    }
 }

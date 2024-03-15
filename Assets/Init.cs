@@ -1,6 +1,4 @@
 using Appsulove.Settings;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Init : MonoBehaviour
@@ -14,8 +12,8 @@ public class Init : MonoBehaviour
 
     private void Start()
     {
-        var interfaceView = new UIView();
-        var gameplayView = new GameplayView();
+        var interfaceView = new UIView(Screens);
+        var gameplayView = new GameplayView(Prefabs, GameSettings, Camera);
         var model = new ApplicationModel();
 
         _presenter = new ApplicationPresenter(gameplayView, interfaceView, model, Screens, GameSettings);
@@ -31,16 +29,18 @@ public class Init : MonoBehaviour
 
 public class UIView : IUserInterfaceView
 {
+    private readonly Screens _screens;
 
+    public UIView(Screens screens)
+    {
+        _screens = screens;
+    }
+
+    public Vector2 TouchPosition => _screens.HUD.TouchScreen.TouchPosition;
 }
 
 public interface IUserInterfaceView
 {
-}
-
-public class GameplayView : IGameplayView
-{
-
 }
 
 public interface IGameplayView

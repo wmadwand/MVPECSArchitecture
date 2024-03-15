@@ -5,15 +5,15 @@ using UnityEngine.EventSystems;
 
 public class TouchScreen : MonoBehaviour, IPointerClickHandler
 {
-    public Vector2 Position { get; private set; }
+    public Vector2 TouchPosition { get; private set; }
 
     private void Awake()
     {
-        Position = Vector2.zero;
+        TouchPosition = new Vector2(Screen.width / 2, Screen.height / 2);
     }
 
     void IPointerClickHandler.OnPointerClick(PointerEventData eventData)
     {
-        Position = eventData.position;
+        TouchPosition = eventData.position;
     }
 }
