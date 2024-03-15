@@ -1,11 +1,11 @@
 using Appsulove.Utils;
 
-public class UserDataStorage
+public class UserDataLocalStorage
 {
     private const string UserDataKey = "UserDataStorageKey";
     private readonly PrefsStorage _prefsStorage;
 
-    public UserDataStorage()
+    public UserDataLocalStorage()
     {
         //TODO: inject
         _prefsStorage = new PrefsStorage();

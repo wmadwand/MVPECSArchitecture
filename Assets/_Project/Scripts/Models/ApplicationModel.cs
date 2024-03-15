@@ -10,12 +10,12 @@ public class ApplicationModel : IApplicationModel
     public int Score { get; private set; }
     public float Distance { get; private set; }
 
-    private readonly UserDataStorage _userDataStorage;
+    private readonly UserDataLocalStorage _userDataStorage;
 
     public ApplicationModel()
     {
         //TODO: inject
-        _userDataStorage = new UserDataStorage();
+        _userDataStorage = new UserDataLocalStorage();
         var data = _userDataStorage.Load();
 
         if (data != null)
