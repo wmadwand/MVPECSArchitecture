@@ -1,13 +1,4 @@
-﻿public interface IApplicationModel
-{
-    float Distance { get; }
-    int Score { get; }
-
-    void Update(int score, float distance);
-    void Save();
-}
-
-public class ApplicationModel : IApplicationModel
+﻿public class ApplicationModel : IApplicationModel
 {
     public int Score { get; private set; }
     public float Distance { get; private set; }

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: GameSettings
   m_EditorClassIdentifier: 
   EnemyPositionOffset: 25
-  PlayerPositionOffset: 100
+  PlayerPositionOffset: 30
   EnemySpawnRate: 5
   EnemyMaxCount: 15
   PlayerSpeed: 5

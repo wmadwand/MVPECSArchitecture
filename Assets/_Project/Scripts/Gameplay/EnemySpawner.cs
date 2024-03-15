@@ -5,7 +5,14 @@ using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class EnemySpawner
+public interface IEnemySpawner
+{
+    int AddScore { get; }
+
+    void Update();
+}
+
+public class EnemySpawner : IEnemySpawner
 {
     public int AddScore { get; private set; }
 
@@ -24,11 +31,9 @@ public class EnemySpawner
 
         _cts = new CancellationTokenSource();
         _ = Run(_cts.Token);
-
-        Player.OnDestroyEnemy += Player_OnDestroyEnemy;
     }
 
-    public void Update()
+    void IEnemySpawner.Update()
     {
         AddScore = 0;
         for (int i = 0; i < _collection.Count; i++)
@@ -43,13 +48,7 @@ public class EnemySpawner
         }
     }
 
-    private void Player_OnDestroyEnemy(Enemy obj)
-    {
-        _collection.Remove(obj);
-        Object.Destroy(obj.gameObject);
-    }
-
-    //TODO: run from Gameplayview & Presenter
+    //TODO: run from Gameplayview & Presenter + pass CancellationToken
     private async UniTask Run(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
@@ -67,11 +66,11 @@ public class EnemySpawner
 
     private Vector3 GetRandomPosition()
     {
-        var offset = 25;
+        var offset = _gameSettings.EnemyPositionOffset;
         var xRnd = Random.Range(offset, Screen.width - offset);
         var yRnd = Random.Range(offset, Screen.height - offset);
 
-        var pos = Camera.main.ScreenToWorldPoint(new Vector3(xRnd, yRnd, 0));
+        var pos = Camera.main.ScreenToWorldPoint(new Vector2(xRnd, yRnd));
         pos.z = 0;
         return pos;
     }

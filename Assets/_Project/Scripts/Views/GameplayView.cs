@@ -6,7 +6,7 @@ public class GameplayView : IGameplayView
     private readonly Prefabs _prefabs;
     private readonly GameSettings _gameSettings;
     private readonly Camera _camera;
-    private readonly EnemySpawner _enemySpawner;
+    private readonly IEnemySpawner _enemySpawner;
 
     private Player _player;
 
@@ -18,12 +18,14 @@ public class GameplayView : IGameplayView
         _prefabs = prefabs;
         _gameSettings = gameSettings;
         _camera = camera;
+
+        //TODO: inject
         _enemySpawner = new EnemySpawner(prefabs, gameSettings, camera);
 
         SpawnPlayer();
     }
 
-    public void Update(Vector2 touchPosition)
+    void IGameplayView.Update(Vector2 touchPosition)
     {
         UpdatePlayer(touchPosition);
         UpdateEnemies();

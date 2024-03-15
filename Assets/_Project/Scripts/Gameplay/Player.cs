@@ -1,14 +1,10 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Player : MonoBehaviour
 {
-    public static event Action<Enemy> OnDestroyEnemy;
-
     public float AddDistance { get; private set; }
-    private Vector3 originPos;
+
+    private Vector3 _originPos;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -16,7 +12,6 @@ public class Player : MonoBehaviour
         if (enemy)
         {
             enemy.IsCollisionEnter = true;
-            //OnDestroyEnemy?.Invoke(enemy);
         }
     }
 
@@ -27,12 +22,12 @@ public class Player : MonoBehaviour
         pos = Camera.main.ScreenToWorldPoint(pos);
         pos.z = 0;
 
-        originPos = transform.position;
+        _originPos = transform.position;
 
         transform.position = Vector3.Lerp(transform.position, pos, playerSpeed * Time.deltaTime);
 
         //TODO: sqrMagnitude
-        AddDistance = Vector3.Distance(originPos, transform.position);
-        originPos = transform.position;
+        AddDistance = Vector3.Distance(_originPos, transform.position);
+        _originPos = transform.position;
     }
 }

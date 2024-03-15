@@ -13,7 +13,7 @@ public class ApplicationPresenter : IApplicationPresenter
     private readonly Screens _screens;
     private readonly GameSettings _settings;
 
-    public ApplicationPresenter(IGameplayView gameplayView, UIView uIView, IApplicationModel model, Screens screens, GameSettings settings)
+    public ApplicationPresenter(IGameplayView gameplayView, IUserInterfaceView uIView, IApplicationModel model, Screens screens, GameSettings settings)
     {
         _gameplayView = gameplayView;
         _interfaceView = uIView;
