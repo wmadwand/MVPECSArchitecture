@@ -786,6 +786,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   TouchScreen: {fileID: 742155420}
+  ScorePanel: {fileID: 1698896180}
 --- !u!1 &1698896178
 GameObject:
   m_ObjectHideFlags: 0

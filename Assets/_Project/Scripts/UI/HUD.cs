@@ -5,4 +5,5 @@ using UnityEngine;
 public class HUD : MonoBehaviour
 {
     public TouchScreen TouchScreen;
+    public ScorePanel ScorePanel;
 }

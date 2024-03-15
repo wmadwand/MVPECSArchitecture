@@ -10,4 +10,9 @@ public class UIView : IUserInterfaceView
     }
 
     public Vector2 TouchPosition => _screens.HUD.TouchScreen.TouchPosition;
+
+    void IUserInterfaceView.Update(int score, float distance)
+    {
+        _screens.HUD.ScorePanel.UpdateView(score, distance);
+    }
 }

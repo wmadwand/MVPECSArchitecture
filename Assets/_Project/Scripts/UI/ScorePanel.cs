@@ -15,27 +15,21 @@ public class ScorePanel : MonoBehaviour
         Player.OnDestroyEnemy += Player_OnDestroyEnemy;
 
         //TODO: move to Presenter
-        model = new ApplicationModel();
-        UpdateView();
-    }
-
-    private void Update()
-    {
-        UpdateView();
+        model = new ApplicationModel();        
     }
 
     private void Player_OnDestroyEnemy(Enemy enemy)
     {
         model.AddScore(enemy.Score);
 
-        UpdateView();
+
     }
 
-    private void UpdateView()
+    public void UpdateView(int score, float distance)
     {
         //TODO: use StringBuilder
-        scoreText.text = $"Score: {model.Score}";
-        distanceText.text = $"Distance: {model.Distance}";
+        scoreText.text = $"Score: {score}";
+        distanceText.text = $"Distance: {distance}";
     }
 
     private void OnDestroy()

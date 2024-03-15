@@ -23,4 +23,9 @@ public class Init : MonoBehaviour
     {
         _presenter.Update();
     }
+
+    private void OnApplicationQuit()
+    {
+        
+    }
 }
