@@ -11,6 +11,7 @@ public class GameplayView : IGameplayView
     private Player _player;
 
     public float AddDistance => _player.AddDistance;
+    public int AddScore => _enemySpawner.AddScore;
 
     public GameplayView(Prefabs prefabs, GameSettings gameSettings, Camera camera)
     {
@@ -25,11 +26,17 @@ public class GameplayView : IGameplayView
     public void Update(Vector2 touchPosition)
     {
         UpdatePlayer(touchPosition);
+        UpdateEnemies();
     }
 
     private void UpdatePlayer(Vector2 touchPosition)
     {
         _player.SetPosition(touchPosition, _gameSettings.PlayerSpeed);
+    }
+
+    private void UpdateEnemies()
+    {
+        _enemySpawner.Update();
     }
 
     private void SpawnPlayer()

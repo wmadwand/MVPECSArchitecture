@@ -7,13 +7,13 @@ public interface IApplicationPresenter
 
 public class ApplicationPresenter : IApplicationPresenter
 {
-    private readonly GameplayView _gameplayView;
+    private readonly IGameplayView _gameplayView;
     private readonly IUserInterfaceView _interfaceView;
     private readonly IApplicationModel _model;
     private readonly Screens _screens;
     private readonly GameSettings _settings;
 
-    public ApplicationPresenter(GameplayView gameplayView, UIView uIView, IApplicationModel model, Screens screens, GameSettings settings)
+    public ApplicationPresenter(IGameplayView gameplayView, UIView uIView, IApplicationModel model, Screens screens, GameSettings settings)
     {
         _gameplayView = gameplayView;
         _interfaceView = uIView;
@@ -26,6 +26,6 @@ public class ApplicationPresenter : IApplicationPresenter
     {
         _gameplayView.Update(_interfaceView.TouchPosition);
         _interfaceView.Update(_model.Score, _model.Distance);
-        _model.Update(0, _gameplayView.AddDistance);
+        _model.Update(_gameplayView.AddScore, _gameplayView.AddDistance);
     }
 }

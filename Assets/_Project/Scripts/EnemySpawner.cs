@@ -7,6 +7,8 @@ using UnityEngine;
 
 public class EnemySpawner
 {
+    public int AddScore { get; private set; }
+
     private readonly Prefabs _prefabs;
     private readonly GameSettings _gameSettings;
     private readonly Camera _camera;
@@ -24,6 +26,21 @@ public class EnemySpawner
         _ = Run(_cts.Token);
 
         Player.OnDestroyEnemy += Player_OnDestroyEnemy;
+    }
+
+    public void Update()
+    {
+        AddScore = 0;
+        for (int i = 0; i < _collection.Count; i++)
+        {
+            var enemy = _collection[i];
+            if (enemy.IsCollisionEnter)
+            {
+                AddScore += enemy.Score;
+                _collection.RemoveAt(i);
+                enemy.Remove();
+            }
+        }
     }
 
     private void Player_OnDestroyEnemy(Enemy obj)

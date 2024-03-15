@@ -15,7 +15,8 @@ public class Player : MonoBehaviour
         var enemy = other.GetComponent<Enemy>();
         if (enemy)
         {
-            OnDestroyEnemy?.Invoke(enemy);
+            enemy.IsCollisionEnter = true;
+            //OnDestroyEnemy?.Invoke(enemy);
         }
     }
 
