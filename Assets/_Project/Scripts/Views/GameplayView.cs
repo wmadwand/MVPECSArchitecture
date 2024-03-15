@@ -3,12 +3,13 @@ using UnityEngine;
 
 public class GameplayView : IGameplayView
 {
+    //TODO: better to have only a couple of dependencies
     private readonly Prefabs _prefabs;
     private readonly GameSettings _gameSettings;
     private readonly Camera _camera;
     private readonly IEnemySpawner _enemySpawner;
 
-    private Player _player;
+    private IPlayer _player;
 
     public float AddDistance => _player.AddDistance;
     public int AddScore => _enemySpawner.AddScore;

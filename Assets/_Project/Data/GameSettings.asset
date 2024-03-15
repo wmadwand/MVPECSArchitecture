@@ -16,4 +16,4 @@ MonoBehaviour:
   PlayerPositionOffset: 30
   EnemySpawnRate: 5
   EnemyMaxCount: 15
-  PlayerSpeed: 5
+  PlayerSpeed: 2

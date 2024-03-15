@@ -69,10 +69,10 @@ public class EnemySpawner : IEnemySpawner
         var offset = _gameSettings.EnemyPositionOffset;
         var xRnd = Random.Range(offset, Screen.width - offset);
         var yRnd = Random.Range(offset, Screen.height - offset);
+        var position = Camera.main.ScreenToWorldPoint(new Vector2(xRnd, yRnd));
+        position.z = 0;
 
-        var pos = Camera.main.ScreenToWorldPoint(new Vector2(xRnd, yRnd));
-        pos.z = 0;
-        return pos;
+        return position;
     }
 
     private void Spawn()
@@ -86,6 +86,7 @@ public class EnemySpawner : IEnemySpawner
     {
         var rndPosition = GetRandomPosition();
         var instance = Object.Instantiate(_prefabs.Enemy, rndPosition, Quaternion.identity);
+
         return instance;
     }
 }

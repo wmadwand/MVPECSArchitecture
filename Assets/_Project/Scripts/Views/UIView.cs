@@ -9,6 +9,7 @@ public class UIView : IUserInterfaceView
         _screens = screens;
     }
 
+    //TODO: apply Demeter Law
     public Vector2 TouchPosition => _screens.HUD.TouchScreen.TouchPosition;
 
     void IUserInterfaceView.Update(int score, float distance)
