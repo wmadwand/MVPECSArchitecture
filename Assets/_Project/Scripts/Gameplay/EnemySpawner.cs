@@ -21,16 +21,13 @@ public class EnemySpawner : IEnemySpawner
     private readonly Camera _camera;
     private readonly List<Enemy> _collection = new List<Enemy>();
 
-    private CancellationTokenSource _cts;
-
-    public EnemySpawner(Prefabs prefabs, GameSettings gameSettings, Camera camera)
+    public EnemySpawner(Prefabs prefabs, GameSettings gameSettings, Camera camera, CancellationToken token)
     {
         _prefabs = prefabs;
         _gameSettings = gameSettings;
         _camera = camera;
 
-        _cts = new CancellationTokenSource();
-        _ = Run(_cts.Token);
+        _ = Run(token);
     }
 
     void IEnemySpawner.Update()
@@ -48,7 +45,6 @@ public class EnemySpawner : IEnemySpawner
         }
     }
 
-    //TODO: run from Gameplayview & Presenter + pass CancellationToken
     //TODO: pass isPause state
     private async UniTask Run(CancellationToken token)
     {

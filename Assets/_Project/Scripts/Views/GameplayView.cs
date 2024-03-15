@@ -1,4 +1,5 @@
 ﻿using Appsulove.Settings;
+using System.Threading;
 using UnityEngine;
 
 public class GameplayView : IGameplayView
@@ -10,6 +11,7 @@ public class GameplayView : IGameplayView
     private readonly IEnemySpawner _enemySpawner;
 
     private IPlayer _player;
+    private CancellationTokenSource _cts;
 
     public float AddDistance => _player.AddDistance;
     public int AddScore => _enemySpawner.AddScore;
@@ -20,8 +22,9 @@ public class GameplayView : IGameplayView
         _gameSettings = gameSettings;
         _camera = camera;
 
+        _cts = new CancellationTokenSource();
         //TODO: inject
-        _enemySpawner = new EnemySpawner(prefabs, gameSettings, camera);
+        _enemySpawner = new EnemySpawner(prefabs, gameSettings, camera, _cts.Token);
 
         SpawnPlayer();
     }
@@ -50,5 +53,17 @@ public class GameplayView : IGameplayView
     private void SpawnPlayer()
     {
         _player = Object.Instantiate(_prefabs.Player);
+    }
+
+    ~GameplayView()
+    {
+        Stop();
+    }
+
+    public void Stop()
+    {
+        _cts.Cancel();
+        _cts.Dispose();
+        _cts = null;
     }
 }
