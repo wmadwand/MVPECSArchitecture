@@ -24,11 +24,3 @@ public class Init : MonoBehaviour
         _presenter.Update();
     }
 }
-
-public interface IUserInterfaceView
-{
-}
-
-public interface IGameplayView
-{
-}

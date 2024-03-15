@@ -1,42 +1,47 @@
+using Appsulove.Settings;
 using Cysharp.Threading.Tasks;
 using System.Collections;
 using System.Collections.Generic;
 using System.Threading;
 using UnityEngine;
 
-public class EnemySpawner : MonoBehaviour
+public class EnemySpawner
 {
-    public Enemy enemyPrefab;
-    public int maxCount = 15;
-    public int spawnRate = 2;
+    private readonly Prefabs _prefabs;
+    private readonly GameSettings _gameSettings;
+    private readonly Camera _camera;
+    private readonly List<Enemy> _collection = new List<Enemy>();
 
-    List<Enemy> collection = new List<Enemy>();
+    private CancellationTokenSource _cts;
 
-    CancellationTokenSource cts;
-
-    private void Start()
+    public EnemySpawner(Prefabs prefabs, GameSettings gameSettings, Camera camera)
     {
-        cts = new CancellationTokenSource();
-        Player.OnDestroyEnemy += Player_OnDestroyEnemy;
+        _prefabs = prefabs;
+        _gameSettings = gameSettings;
+        _camera = camera;
 
-        _ = Run(cts.Token);
+        _cts = new CancellationTokenSource();
+        _ = Run(_cts.Token);
+
+        Player.OnDestroyEnemy += Player_OnDestroyEnemy;
     }
 
     private void Player_OnDestroyEnemy(Enemy obj)
     {
-        collection.Remove(obj);
-        Destroy(obj.gameObject);
+        _collection.Remove(obj);
+        Object.Destroy(obj.gameObject);
     }
 
+    //TODO: run from Gameplayview & Presenter
     private async UniTask Run(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
-            if (collection.Count < maxCount)
+            if (_collection.Count < _gameSettings.EnemyMaxCount)
             {
                 Spawn();
 
-                await UniTask.Delay(spawnRate * 100, cancellationToken: token);
+                await UniTask.Delay(_gameSettings.EnemySpawnRate * 100, cancellationToken: token);
             }
 
             await UniTask.Yield(cancellationToken: token);
@@ -56,16 +61,15 @@ public class EnemySpawner : MonoBehaviour
 
     private void Spawn()
     {
-        var newEnemy = CreateEnemy();
-        newEnemy.Score = Random.Range(10, 50);
-        collection.Add(newEnemy);
+        var enemy = CreateEnemy();
+        enemy.Score = Random.Range(10, 50);
+        _collection.Add(enemy);
     }
-
 
     private Enemy CreateEnemy()
     {
         var rndPosition = GetRandomPosition();
-        var instance = Instantiate(enemyPrefab, rndPosition, Quaternion.identity, transform);
+        var instance = Object.Instantiate(_prefabs.Enemy, rndPosition, Quaternion.identity);
         return instance;
     }
 }

@@ -6,6 +6,7 @@ public class GameplayView : IGameplayView
     private readonly Prefabs _prefabs;
     private readonly GameSettings _gameSettings;
     private readonly Camera _camera;
+    private readonly EnemySpawner _enemySpawner;
 
     private Player _player;
 
@@ -14,6 +15,7 @@ public class GameplayView : IGameplayView
         _prefabs = prefabs;
         _gameSettings = gameSettings;
         _camera = camera;
+        _enemySpawner = new EnemySpawner(prefabs, gameSettings, camera);
 
         SpawnPlayer();
     }

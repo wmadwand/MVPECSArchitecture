@@ -32,8 +32,7 @@ public class Player : MonoBehaviour
         //    //TODO: sqrMagnitude
         //    var distance = Vector3.Distance(originPos, player.transform.position);
         //scorePanel.model.AddDistance(distance);
-
-        //    //TotalDistance += distance;
+        
         //    originPos = player.transform.position;
     }
 }
