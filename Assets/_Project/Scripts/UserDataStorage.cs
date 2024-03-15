@@ -20,9 +20,9 @@ public class UserDataStorage
     private const string UserDataKey = "UserDataStorageKey";
     private readonly PrefsStorage _prefsStorage;
 
-    //TODO: inject
     public UserDataStorage()
     {
+        //TODO: inject
         _prefsStorage = new PrefsStorage();
     }
 

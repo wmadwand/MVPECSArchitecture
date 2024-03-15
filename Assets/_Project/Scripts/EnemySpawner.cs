@@ -45,7 +45,7 @@ public class EnemySpawner : MonoBehaviour
 
     private Vector3 GetRandomPosition()
     {
-        var offset = 5;
+        var offset = 25;
         var xRnd = Random.Range(offset, Screen.width - offset);
         var yRnd = Random.Range(offset, Screen.height - offset);
 

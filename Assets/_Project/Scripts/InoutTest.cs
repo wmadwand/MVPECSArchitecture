@@ -29,7 +29,7 @@ public class InoutTest : MonoBehaviour
     }
 
     Vector3 originPos;
-   //public float TotalDistance { get; private set; }
+    //public float TotalDistance { get; private set; }
 
     //TODO: move into FixedUpdate
     private void Update()
@@ -37,7 +37,11 @@ public class InoutTest : MonoBehaviour
         //TODO: use IPointerClickHandler instead
         if (Input.GetMouseButtonDown(0))
         {
-            pos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+            var offset = 30;
+            var pos1 = Input.mousePosition;
+            pos1 = new Vector3(Mathf.Clamp(pos1.x, offset, Screen.width - offset), Mathf.Clamp(pos1.y, offset, Screen.height - offset), pos1.z);
+            pos = Camera.main.ScreenToWorldPoint(pos1);
             pos.z = 0;
 
             originPos = player.transform.position;
@@ -45,8 +49,8 @@ public class InoutTest : MonoBehaviour
 
         player.transform.position = Vector3.Lerp(player.transform.position, pos, speed * Time.deltaTime);
 
+        //TODO: sqrMagnitude
         var distance = Vector3.Distance(originPos, player.transform.position);
-
         scorePanel.model.AddDistance(distance);
 
         //TotalDistance += distance;
