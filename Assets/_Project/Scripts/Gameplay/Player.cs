@@ -4,7 +4,7 @@ public interface IPlayer
 {
     float AddDistance { get; }
 
-    void SetPosition(Vector2 touchPosition, float playerSpeed);
+    void SetPosition(Vector2 touchPosition, float playerSpeed, int offset);
 }
 
 public class Player : MonoBehaviour, IPlayer
@@ -22,11 +22,8 @@ public class Player : MonoBehaviour, IPlayer
         }
     }
 
-    public void SetPosition(Vector2 touchPosition, float playerSpeed)
+    public void SetPosition(Vector2 touchPosition, float playerSpeed, int offset)
     {
-        //TODO: inject Settings
-        var offset = 30;
-
         var pos = new Vector3(Mathf.Clamp(touchPosition.x, offset, Screen.width - offset), Mathf.Clamp(touchPosition.y, offset, Screen.height - offset));
         pos = Camera.main.ScreenToWorldPoint(pos);
         pos.z = 0;

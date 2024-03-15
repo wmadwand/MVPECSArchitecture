@@ -49,11 +49,12 @@ public class EnemySpawner : IEnemySpawner
     }
 
     //TODO: run from Gameplayview & Presenter + pass CancellationToken
+    //TODO: pass isPause state
     private async UniTask Run(CancellationToken token)
     {
         while (!token.IsCancellationRequested)
         {
-            if (_collection.Count < _gameSettings.EnemyMaxCount)
+            if (_collection.Count < _gameSettings.EnemyMaxCount /*&& !isPause*/)
             {
                 Spawn();
 

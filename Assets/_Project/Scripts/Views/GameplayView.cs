@@ -39,7 +39,7 @@ public class GameplayView : IGameplayView
 
     private void UpdatePlayer(Vector2 touchPosition)
     {
-        _player.SetPosition(touchPosition, _gameSettings.PlayerSpeed);
+        _player.SetPosition(touchPosition, _gameSettings.PlayerSpeed, _gameSettings.PlayerPositionOffset);
     }
 
     private void UpdateEnemies()
