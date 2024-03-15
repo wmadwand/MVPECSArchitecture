@@ -37,7 +37,6 @@ public class ApplicationPresenter : IApplicationPresenter
         {
             //TODO: put movement in FixedUpdate to avoid frame rate dependency (for physics)
             _gameplayView.Update(_interfaceView.TouchPosition);
-
             _interfaceView.Update(_model.Score, _model.Distance);
             _model.Update(_gameplayView.AddScore, _gameplayView.AddDistance);
         }

@@ -1,14 +1,15 @@
-﻿public class ApplicationModel : IApplicationModel
+﻿using Zenject;
+
+public class ApplicationModel : IApplicationModel
 {
     public int Score { get; private set; }
     public float Distance { get; private set; }
 
     private readonly UserDataLocalStorage _userDataStorage;
 
-    public ApplicationModel()
+    public ApplicationModel(UserDataLocalStorage userDataStorage)
     {
-        //TODO: inject
-        _userDataStorage = new UserDataLocalStorage();
+        _userDataStorage = userDataStorage;
         var data = _userDataStorage.Load();
 
         if (data != null)

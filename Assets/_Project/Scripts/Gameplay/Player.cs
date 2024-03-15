@@ -1,4 +1,6 @@
+using System;
 using UnityEngine;
+using Zenject;
 
 public interface IPlayer
 {
@@ -12,6 +14,13 @@ public class Player : MonoBehaviour, IPlayer
     public float AddDistance { get; private set; }
 
     private Vector3 _originPos;
+    private ExtraSettings _extraSettings;
+
+    [Inject]
+    private void Construct(ExtraSettings extraSettings)
+    {
+        _extraSettings = extraSettings;
+    }
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -29,11 +38,18 @@ public class Player : MonoBehaviour, IPlayer
         pos.z = 0;
 
         _originPos = transform.position;
-
         transform.position = Vector3.Lerp(transform.position, pos, playerSpeed * Time.deltaTime);
-
         //TODO: sqrMagnitude
         AddDistance = Vector3.Distance(_originPos, transform.position);
         _originPos = transform.position;
     }
+
+    [Serializable]
+    public class ExtraSettings
+    {
+        public Vector3 Velocity;
+    }
+
+    //TODO:
+    //public class Factory : PlaceholderFactory<Player> { }
 }

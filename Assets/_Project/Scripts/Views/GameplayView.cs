@@ -23,7 +23,6 @@ public class GameplayView : IGameplayView
         _camera = camera;
 
         _cts = new CancellationTokenSource();
-        //TODO: inject
         _enemySpawner = new EnemySpawner(prefabs, gameSettings, camera, _cts.Token);
 
         SpawnPlayer();
