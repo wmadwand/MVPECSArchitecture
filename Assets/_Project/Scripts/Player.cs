@@ -7,7 +7,8 @@ public class Player : MonoBehaviour
 {
     public static event Action<Enemy> OnDestroyEnemy;
 
-    //public bool Is
+    public float AddDistance { get; private set; }
+    private Vector3 originPos;
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -25,14 +26,12 @@ public class Player : MonoBehaviour
         pos = Camera.main.ScreenToWorldPoint(pos);
         pos.z = 0;
 
-        //originPos = player.transform.position;
+        originPos = transform.position;
 
         transform.position = Vector3.Lerp(transform.position, pos, playerSpeed * Time.deltaTime);
 
-        //    //TODO: sqrMagnitude
-        //    var distance = Vector3.Distance(originPos, player.transform.position);
-        //scorePanel.model.AddDistance(distance);
-        
-        //    originPos = player.transform.position;
+        //TODO: sqrMagnitude
+        AddDistance = Vector3.Distance(originPos, transform.position);
+        originPos = transform.position;
     }
 }

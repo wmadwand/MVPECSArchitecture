@@ -51,7 +51,7 @@ public class InoutTest : MonoBehaviour
 
         //TODO: sqrMagnitude
         var distance = Vector3.Distance(originPos, player.transform.position);
-        scorePanel.model.AddDistance(distance);
+        //scorePanel.model.AddDistance(distance);
 
         //TotalDistance += distance;
         originPos = player.transform.position;

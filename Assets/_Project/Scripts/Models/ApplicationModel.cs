@@ -1,8 +1,10 @@
-﻿using UnityEngine;
-
-public interface IApplicationModel
+﻿public interface IApplicationModel
 {
+    float Distance { get; }
+    int Score { get; }
 
+    void Update(int score, float distance);
+    void Save();
 }
 
 public class ApplicationModel : IApplicationModel
@@ -25,29 +27,15 @@ public class ApplicationModel : IApplicationModel
         }
     }
 
-    private UserData GetUserData()
+    void IApplicationModel.Save()
     {
-        return new UserData(Score, Distance);
+        var data = new UserData(Score, Distance);
+        _userDataStorage.Save(data);
     }
 
-    public void AddDistance(float value)
+    void IApplicationModel.Update(int score, float distance)
     {
-        Distance += value;
-    }
-
-    public void Save()
-    {
-        _userDataStorage.Save(GetUserData());
-    }
-
-    public void AddScore(int value)
-    {
-        Score += value;
-    }
-
-    public void LoseScore(int value)
-    {
-        Score -= value;
-        Score = Mathf.Clamp(Score, 0, Score);
+        Distance += distance;
+        Score += score;
     }
 }

@@ -9,14 +9,15 @@ public class Init : MonoBehaviour
     [SerializeField] private Camera Camera;
 
     private IApplicationPresenter _presenter;
+    private IApplicationModel _model;
 
     private void Start()
     {
         var interfaceView = new UIView(Screens);
         var gameplayView = new GameplayView(Prefabs, GameSettings, Camera);
-        var model = new ApplicationModel();
+        _model = new ApplicationModel();
 
-        _presenter = new ApplicationPresenter(gameplayView, interfaceView, model, Screens, GameSettings);
+        _presenter = new ApplicationPresenter(gameplayView, interfaceView, _model, Screens, GameSettings);
     }
 
     private void Update()
@@ -26,6 +27,6 @@ public class Init : MonoBehaviour
 
     private void OnApplicationQuit()
     {
-        
+        _model.Save();
     }
 }

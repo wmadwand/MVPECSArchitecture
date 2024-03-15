@@ -10,6 +10,8 @@ public class GameplayView : IGameplayView
 
     private Player _player;
 
+    public float AddDistance => _player.AddDistance;
+
     public GameplayView(Prefabs prefabs, GameSettings gameSettings, Camera camera)
     {
         _prefabs = prefabs;
