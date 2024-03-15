@@ -32,6 +32,11 @@ public class GameplayView : IGameplayView
         UpdateEnemies();
     }
 
+    void IGameplayView.SetPause(bool toTrue)
+    {
+        Time.timeScale = toTrue ? 0f : 1f;
+    }
+
     private void UpdatePlayer(Vector2 touchPosition)
     {
         _player.SetPosition(touchPosition, _gameSettings.PlayerSpeed);

@@ -13,6 +13,8 @@ public class ApplicationPresenter : IApplicationPresenter
     private readonly Screens _screens;
     private readonly GameSettings _settings;
 
+    private bool _isPause;
+
     public ApplicationPresenter(IGameplayView gameplayView, IUserInterfaceView uIView, IApplicationModel model, Screens screens, GameSettings settings)
     {
         _gameplayView = gameplayView;
@@ -24,10 +26,27 @@ public class ApplicationPresenter : IApplicationPresenter
 
     void IApplicationPresenter.Update()
     {
-        //TODO: put movement in FixedUpdate
-        _gameplayView.Update(_interfaceView.TouchPosition);
+        if (_interfaceView.Pause)
+        {
+            _gameplayView.SetPause(true);
+            _interfaceView.ShowPause(true);
+            _isPause = true;
+        }
 
-        _interfaceView.Update(_model.Score, _model.Distance);
-        _model.Update(_gameplayView.AddScore, _gameplayView.AddDistance);
+        if (!_isPause)
+        {
+            //TODO: put movement in FixedUpdate to avoid frame rate dependency (for physics)
+            _gameplayView.Update(_interfaceView.TouchPosition);
+
+            _interfaceView.Update(_model.Score, _model.Distance);
+            _model.Update(_gameplayView.AddScore, _gameplayView.AddDistance);
+        }
+
+        if (_interfaceView.Resume)
+        {
+            _interfaceView.ShowPause(false);
+            _gameplayView.SetPause(false);
+            _isPause = false;
+        }
     }
 }

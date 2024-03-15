@@ -6,4 +6,5 @@ public interface IGameplayView
     int AddScore { get; }
 
     void Update(Vector2 touchPosition);
+    void SetPause(bool toTrue);
 }
