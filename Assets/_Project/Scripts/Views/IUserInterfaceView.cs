@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 public interface IUserInterfaceView
 {
@@ -7,4 +8,5 @@ public interface IUserInterfaceView
     bool Pause { get; }
     bool Resume { get; }
     void ShowPause(bool value);
+    Text DistanceRxText { get; }
 }

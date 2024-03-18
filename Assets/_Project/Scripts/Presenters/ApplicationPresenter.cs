@@ -1,4 +1,5 @@
 ﻿using Appsulove.Settings;
+using UniRx;
 
 public interface IApplicationPresenter
 {
@@ -22,6 +23,8 @@ public class ApplicationPresenter : IApplicationPresenter
         _model = model;
         _screens = screens;
         _settings = settings;
+
+        _model.DistanceRx.SubscribeToText(uIView.DistanceRxText);
     }
 
     void IApplicationPresenter.Update()

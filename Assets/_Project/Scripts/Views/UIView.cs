@@ -1,5 +1,7 @@
 ﻿using Appsulove.Views.UserInput;
+using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class UIView : IUserInterfaceView
 {
@@ -10,6 +12,8 @@ public class UIView : IUserInterfaceView
 
     public bool Pause => _pause.TryGet();
     public bool Resume => _resume.TryGet();
+
+    public Text DistanceRxText => _screens.HUD.ScorePanel.DistanceRxText;
 
     public UIView(Screens screens)
     {
