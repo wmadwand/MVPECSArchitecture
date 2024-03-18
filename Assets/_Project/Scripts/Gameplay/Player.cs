@@ -15,11 +15,13 @@ public class Player : MonoBehaviour, IPlayer
 
     private Vector3 _originPos;
     private ExtraSettings _extraSettings;
+    private Camera _camera;
 
     [Inject]
-    private void Construct(ExtraSettings extraSettings)
+    private void Construct(ExtraSettings extraSettings, Camera camera)
     {
         _extraSettings = extraSettings;
+        _camera = camera;
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -34,7 +36,7 @@ public class Player : MonoBehaviour, IPlayer
     public void SetPosition(Vector2 touchPosition, float playerSpeed, int offset)
     {
         var pos = new Vector3(Mathf.Clamp(touchPosition.x, offset, Screen.width - offset), Mathf.Clamp(touchPosition.y, offset, Screen.height - offset));
-        pos = Camera.main.ScreenToWorldPoint(pos);
+        pos = _camera.ScreenToWorldPoint(pos);
         pos.z = 0;
 
         _originPos = transform.position;
