@@ -25,7 +25,7 @@ public class Init : MonoBehaviour
         var gameplayView = new GameplayView(Prefabs, GameSettings, Camera);
         _model = new ApplicationModel(_userDataStorage);
 
-        _presenter = new ApplicationPresenter(gameplayView, interfaceView, _model, Screens, GameSettings);
+        _presenter = new ApplicationPresenter(gameplayView, interfaceView, _model);
     }
 
     private void Update()

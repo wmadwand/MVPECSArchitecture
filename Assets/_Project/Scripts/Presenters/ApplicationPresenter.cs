@@ -11,18 +11,14 @@ public class ApplicationPresenter : IApplicationPresenter
     private readonly IGameplayView _gameplayView;
     private readonly IUserInterfaceView _interfaceView;
     private readonly IApplicationModel _model;
-    private readonly Screens _screens;
-    private readonly GameSettings _settings;
 
     private bool _isPause;
 
-    public ApplicationPresenter(IGameplayView gameplayView, IUserInterfaceView uIView, IApplicationModel model, Screens screens, GameSettings settings)
+    public ApplicationPresenter(IGameplayView gameplayView, IUserInterfaceView uIView, IApplicationModel model)
     {
         _gameplayView = gameplayView;
         _interfaceView = uIView;
         _model = model;
-        _screens = screens;
-        _settings = settings;
 
         _model.DistanceRx.SubscribeToText(uIView.DistanceRxText);
     }
